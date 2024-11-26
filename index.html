@@ -3,82 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallet Query Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            text-align: center;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 300px;
-        }
-        h1 {
-            color: #333;
-        }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #wallet-address {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-            word-wrap: break-word;
-        }
-    </style>
-    <script>
-        async function queryWallet() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    // Request wallet connection
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const walletAddress = accounts[0];
-
-                    // Display wallet address
-                    document.getElementById('wallet-address').innerText = `Connected Wallet: ${walletAddress}`;
-                } catch (error) {
-                    document.getElementById('wallet-address').innerText = 'Error connecting to wallet!';
-                    console.error(error);
-                }
-            } else {
-                document.getElementById('wallet-address').innerText = 'MetaMask is not installed!';
-            }
-        }
-    </script>
-</head>
-<body>
-    <div class="container">
-        <h1>Wallet Query</h1>
-        <button onclick="queryWallet()">Query Wallet</button>
-        <p id="wallet-address"></p>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FATF Style Page</title>
+    <title>FATF Style Page with Wallet Query</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -145,6 +70,25 @@
             color: #c00;
             font-size: 18px;
         }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #wallet-address {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+            word-wrap: break-word;
+        }
         footer {
             background-color: #333;
             color: #fff;
@@ -153,6 +97,22 @@
             margin-top: 20px;
         }
     </style>
+    <script>
+        async function queryWallet() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const walletAddress = accounts[0];
+                    document.getElementById('wallet-address').innerText = `Connected Wallet: ${walletAddress}`;
+                } catch (error) {
+                    document.getElementById('wallet-address').innerText = 'Error connecting to wallet!';
+                    console.error(error);
+                }
+            } else {
+                document.getElementById('wallet-address').innerText = 'MetaMask is not installed!';
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -179,8 +139,10 @@
                 <p>Explore our latest reports, publications, and global assessments.</p>
             </div>
             <div class="card">
-                <h3>Get Involved</h3>
-                <p>Learn how you can contribute to the fight against financial crimes.</p>
+                <h3>Wallet Query</h3>
+                <p>Click below to query your connected wallet.</p>
+                <button onclick="queryWallet()">Query Wallet</button>
+                <p id="wallet-address"></p>
             </div>
         </div>
     </div>

